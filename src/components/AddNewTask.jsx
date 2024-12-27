@@ -1,21 +1,17 @@
 import { v4 as uuidv4 } from "uuid";
-import uid from "uid2";
 
 export default function AddNewTask(props) {
   const { tasks, setTasks, newTaskLabel, setNewTaskLabel } = props;
 
-  const id = uid(10);
-
   return (
-    <>
-      {" "}
+    <div className="new-task-form">
       <form>
         <input
           type="text"
           value={newTaskLabel}
-          name="task-label"
-          id="task-label"
-          placeholder="Your task description"
+          // name="task-label"
+          // id="task-label"
+          placeholder="New task..."
           onChange={(event) => {
             setNewTaskLabel(event.target.value);
           }}
@@ -34,6 +30,6 @@ export default function AddNewTask(props) {
           Add task
         </button>
       </form>
-    </>
+    </div>
   );
 }

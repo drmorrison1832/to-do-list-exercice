@@ -1,39 +1,41 @@
 import { useState } from "react";
-import TasksList from "./TasksList";
-import AddNewTask from "./AddNewTask";
-import ArchiveList from "./ArchiveList";
+import TasksList from "./components/TasksList";
+import AddNewTask from "./components/AddNewTask";
+import ArchivedList from "./components/ArchivedList";
 import "./App.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-library.add(faTrash);
+import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
+
+library.add(faTrash, faRotateLeft);
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  const [archive, setArchive] = useState([]);
-  const [newTaskLabel, setNewTaskLabel] = useState();
+  const [newTaskLabel, setNewTaskLabel] = useState("");
+  const [archivedTasks, setArchivedTasks] = useState([]);
 
   return (
     <>
+      <TasksList
+        tasks={tasks}
+        setTasks={setTasks}
+        archivedTasks={archivedTasks}
+        setArchivedTasks={setArchivedTasks}
+      />
       <div>
-        <TasksList
+        <AddNewTask
           tasks={tasks}
           setTasks={setTasks}
-          archive={archive}
-          setArchive={setArchive}
+          newTaskLabel={newTaskLabel}
+          setNewTaskLabel={setNewTaskLabel}
         />
       </div>
-      <AddNewTask
+      <ArchivedList
         tasks={tasks}
         setTasks={setTasks}
-        newTaskLabel={newTaskLabel}
-        setNewTaskLabel={setNewTaskLabel}
-      />
-      <ArchiveList
-        tasks={tasks}
-        setTasks={setTasks}
-        archive={archive}
-        setArchive={setArchive}
+        archivedTasks={archivedTasks}
+        setArchivedTasks={setArchivedTasks}
       />
     </>
   );

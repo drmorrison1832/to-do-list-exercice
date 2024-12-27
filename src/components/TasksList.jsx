@@ -1,17 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function TasksList(props) {
-  const { tasks, setTasks, archive, setArchive } = props;
+  const { tasks, setTasks, archivedTasks, setArchivedTasks } = props;
 
   return (
     tasks && (
-      <div>
+      <div className="tasks-list">
         {tasks.map((task, index) => {
           return (
-            <div key={task.id}>
+            <div className="task" key={task.id}>
               <label>
                 <input
                   type="checkbox"
+                  checked={task.isDone}
                   onChange={(event) => {
                     const updateTasks = [...tasks];
                     if (event.target.checked === true) {
@@ -35,8 +36,8 @@ function TasksList(props) {
               <FontAwesomeIcon
                 icon="fa-solid fa-trash"
                 onClick={() => {
-                  const updateArchive = [...archive, task];
-                  setArchive(updateArchive);
+                  const updateArchivedTasks = [...archivedTasks, task];
+                  setArchivedTasks(updateArchivedTasks);
                   const updateTasks = [...tasks];
                   updateTasks.splice(index, 1);
                   setTasks(updateTasks);

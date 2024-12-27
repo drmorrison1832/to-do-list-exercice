@@ -1,26 +1,26 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function ArchiveList(props) {
-  const { tasks, setTasks, archive, setArchive } = props;
+function ArchivedList(props) {
+  const { tasks, setTasks, archivedTasks, setArchivedTasks } = props;
 
   return (
-    archive && (
-      <div>
-        {archive.map((task, index) => {
+    archivedTasks && (
+      <div className="archived-tasks">
+        {archivedTasks.map((task, index) => {
           return (
-            <div key={task.id}>
+            <div className="task" key={task.id}>
               <label>
                 <input
                   type="checkbox"
                   checked={task.isDone}
                   onChange={(event) => {
-                    const updateArchive = [...archive];
+                    const updateArchivedTasks = [...archivedTasks];
                     if (event.target.checked === true) {
-                      updateArchive[index].isDone = true;
+                      updateArchivedTasks[index].isDone = true;
                     } else {
-                      updateArchive[index].isDone = false;
+                      updateArchivedTasks[index].isDone = false;
                     }
-                    setArchive(updateArchive);
+                    setArchivedTasks(updateArchivedTasks);
                   }}
                 ></input>
                 <span
@@ -32,8 +32,17 @@ function ArchiveList(props) {
                 >
                   {task.label}
                 </span>
-                <FontAwesomeIcon icon="fa-solid fa-rotate-left" />
               </label>
+              <FontAwesomeIcon
+                icon="fa-solid fa-rotate-left"
+                onClick={() => {
+                  const updateArchivedTasks = [...archivedTasks];
+                  updateArchivedTasks.splice(index, 1);
+                  const updateTasks = [...tasks, task];
+                  setArchivedTasks(updateArchivedTasks);
+                  setTasks(updateTasks);
+                }}
+              />
               {/* <FontAwesomeIcon
                 icon="fa-solid fa-trash"
                 onClick={() => {
@@ -52,4 +61,4 @@ function ArchiveList(props) {
   );
 }
 
-export default ArchiveList;
+export default ArchivedList;
