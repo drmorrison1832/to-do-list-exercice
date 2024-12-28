@@ -1,7 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
+import { useEffect, useState } from "react";
 
 export default function AddNewTask(props) {
   const { tasks, setTasks, newTaskLabel, setNewTaskLabel } = props;
+  const [updateDate, setUpdateDate] = useState("chargin...");
 
   return (
     <div className="new-task-form">
@@ -9,8 +11,8 @@ export default function AddNewTask(props) {
         <input
           type="text"
           value={newTaskLabel}
-          // name="task-label"
-          // id="task-label"
+          name="new-task-label"
+          id="new-task-label"
           placeholder="New task..."
           onChange={(event) => {
             setNewTaskLabel(event.target.value);
@@ -27,7 +29,7 @@ export default function AddNewTask(props) {
             setNewTaskLabel("");
           }}
         >
-          Add task
+          <p>Add task</p>
         </button>
       </form>
     </div>

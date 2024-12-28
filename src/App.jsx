@@ -1,8 +1,9 @@
-import { useState } from "react";
+import "./App.css";
+import { useState, useEffect } from "react";
 import TasksList from "./components/TasksList";
 import AddNewTask from "./components/AddNewTask";
 import ArchivedList from "./components/ArchivedList";
-import "./App.css";
+import AxiosTest from "./components/AxiosTest";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -30,6 +31,7 @@ function App() {
           newTaskLabel={newTaskLabel}
           setNewTaskLabel={setNewTaskLabel}
         />
+        <AxiosTest />
       </div>
       <ArchivedList
         tasks={tasks}

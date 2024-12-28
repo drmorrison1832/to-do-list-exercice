@@ -96,8 +96,9 @@ input:checked {
 button {
   background: none;
   /* background-color: #636363; */
-  border-width: 1px;
+  border-width: 0.5px;
   border-style: solid;
+  border-color: orange;
 
   display: inline-block;
   flex-shrink: 0;
@@ -133,4 +134,8 @@ label {
   flex-direction: row;
   align-items: center;
   gap: 5px;
+}
+
+.test-axios {
+  font-size: 0.7rem;
 }
