@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function TasksList(props) {
-  const { tasks, setTasks, archivedTasks, setArchivedTasks } = props;
+  const { tasks, setTasks } = props;
 
   return (
-    tasks && (
-      <div className="tasks-list">
-        {tasks.map((task, index) => {
+    <div className="tasks-list">
+      {tasks.map((task, index) => {
+        if (!task.isArchived) {
           return (
             <div className="task" key={task.id}>
               <label>
@@ -36,18 +36,16 @@ function TasksList(props) {
               <FontAwesomeIcon
                 icon="fa-solid fa-trash"
                 onClick={() => {
-                  const updateArchivedTasks = [...archivedTasks, task];
-                  setArchivedTasks(updateArchivedTasks);
                   const updateTasks = [...tasks];
-                  updateTasks.splice(index, 1);
+                  updateTasks[index].isArchived = true;
                   setTasks(updateTasks);
                 }}
               />
             </div>
           );
-        })}
-      </div>
-    )
+        }
+      })}
+    </div>
   );
 }
 

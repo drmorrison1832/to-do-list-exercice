@@ -1,64 +1,53 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function ArchivedList(props) {
-  const { tasks, setTasks, archivedTasks, setArchivedTasks } = props;
+  const { tasks, setTasks } = props;
 
-  return (
-    archivedTasks && (
+  {
+    return (
       <div className="archived-tasks">
-        {archivedTasks.map((task, index) => {
-          return (
-            <div className="task" key={task.id}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={task.isDone}
-                  onChange={(event) => {
-                    const updateArchivedTasks = [...archivedTasks];
-                    if (event.target.checked === true) {
-                      updateArchivedTasks[index].isDone = true;
-                    } else {
-                      updateArchivedTasks[index].isDone = false;
+        {tasks.map((task, index) => {
+          if (task.isArchived)
+            return (
+              <div className="task" key={task.id}>
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={task.isDone}
+                    onChange={(event) => {
+                      const updateTasks = [...tasks];
+                      if (event.target.checked === true) {
+                        updateTasks[index].isDone = true;
+                      } else {
+                        updateTasks[index].isDone = false;
+                      }
+                      setTasks(updateTasks);
+                    }}
+                  ></input>
+                  <span
+                    style={
+                      task.isDone
+                        ? { textDecorationLine: "line-through" }
+                        : { textDecorationLine: "none" }
                     }
-                    setArchivedTasks(updateArchivedTasks);
+                  >
+                    {task.label}
+                  </span>
+                </label>
+                <FontAwesomeIcon
+                  icon="fa-solid fa-rotate-left"
+                  onClick={() => {
+                    const updateTasks = [...tasks];
+                    updateTasks[index].isArchived = false;
+                    setTasks(updateTasks);
                   }}
-                ></input>
-                <span
-                  style={
-                    task.isDone
-                      ? { textDecorationLine: "line-through" }
-                      : { textDecorationLine: "none" }
-                  }
-                >
-                  {task.label}
-                </span>
-              </label>
-              <FontAwesomeIcon
-                icon="fa-solid fa-rotate-left"
-                onClick={() => {
-                  const updateArchivedTasks = [...archivedTasks];
-                  updateArchivedTasks.splice(index, 1);
-                  const updateTasks = [...tasks, task];
-                  setArchivedTasks(updateArchivedTasks);
-                  setTasks(updateTasks);
-                }}
-              />
-              {/* <FontAwesomeIcon
-                icon="fa-solid fa-trash"
-                onClick={() => {
-                  const updateArchive = [...archive, task];
-                  setArchive(updateArchive);
-                  const updateTasks = [...tasks];
-                  updateTasks.splice(index, 1);
-                  setTasks(updateTasks);
-                }}
-              /> */}
-            </div>
-          );
+                />
+              </div>
+            );
         })}
       </div>
-    )
-  );
+    );
+  }
 }
 
 export default ArchivedList;

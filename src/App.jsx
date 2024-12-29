@@ -18,12 +18,7 @@ function App() {
 
   return (
     <>
-      <TasksList
-        tasks={tasks}
-        setTasks={setTasks}
-        archivedTasks={archivedTasks}
-        setArchivedTasks={setArchivedTasks}
-      />
+      <TasksList tasks={tasks} setTasks={setTasks} />
       <div>
         <AddNewTask
           tasks={tasks}
@@ -33,12 +28,7 @@ function App() {
         />
         <AxiosTest />
       </div>
-      <ArchivedList
-        tasks={tasks}
-        setTasks={setTasks}
-        archivedTasks={archivedTasks}
-        setArchivedTasks={setArchivedTasks}
-      />
+      <ArchivedList tasks={tasks} setTasks={setTasks} />
     </>
   );
 }

@@ -23,7 +23,12 @@ export default function AddNewTask(props) {
             event.preventDefault();
             const updateTasks = [
               ...tasks,
-              { label: newTaskLabel, isDone: false, id: uuidv4() },
+              {
+                label: newTaskLabel,
+                isDone: false,
+                isArchived: false,
+                id: uuidv4(),
+              },
             ];
             newTaskLabel && setTasks(updateTasks);
             setNewTaskLabel("");
