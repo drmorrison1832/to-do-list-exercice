@@ -12,9 +12,9 @@ const TasksList = (props) => {
   if (mustRetrieve) {
     return (
       <div className="tasks-list">
-        <p>
+        {/* <p>
           {mustRetrieve ? "true" : `false, tasks length is ${tasks.length}`}
-        </p>
+        </p> */}
         <p>Loading content...</p>
       </div>
     );
@@ -23,9 +23,9 @@ const TasksList = (props) => {
   if (tasks.length === 0) {
     return (
       <div className="tasks-list">
-        <p>
+        {/* <p>
           {mustRetrieve ? "true" : `false, tasks length is ${tasks.length}`}
-        </p>
+        </p> */}
         <p>Start adding tasks...</p>
       </div>
     );
@@ -33,7 +33,7 @@ const TasksList = (props) => {
 
   return (
     <div className="tasks-list">
-      {mustRetrieve ? "true" : `false, tasks length is ${tasks.length}`}
+      {/* {mustRetrieve ? "true" : `false, tasks length is ${tasks.length}`} */}
       {tasks.map((task, index) => {
         if (!task.isArchived) {
           return (
@@ -95,9 +95,7 @@ const TasksList = (props) => {
                 onClick={() => {
                   console.log(task._id);
                   axios
-                    .put("http://localhost:3000/delete", {
-                      id: task._id,
-                    })
+                    .delete(`http://localhost:3000/${task._id}`)
                     .then((response) => {
                       console.log(response);
                     })

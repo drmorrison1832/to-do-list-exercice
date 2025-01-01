@@ -92,9 +92,7 @@ function ArchivedList(props) {
                 onClick={() => {
                   // console.log(task._id);
                   axios
-                    .put("http://localhost:3000/delete", {
-                      id: task._id,
-                    })
+                    .delete(`http://localhost:3000/${task._id}`)
                     .then((response) => {
                       console.log(response);
                     })

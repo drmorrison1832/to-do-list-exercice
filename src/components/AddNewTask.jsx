@@ -28,7 +28,6 @@ export default function AddNewTask(props) {
         new Date().getMilliseconds()
       );
       setMustRetrieve(true);
-      setReload(true);
     }
   }
 
@@ -52,12 +51,3 @@ export default function AddNewTask(props) {
     </div>
   );
 }
-/* axios
-                .get("http://localhost:3000/")
-                .then((response) => {
-                  setTasks(response.data);
-                  
-                })
-                .catch((error) => {
-                  console.error(error);
-                }); */
