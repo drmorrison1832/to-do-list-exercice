@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const AxiosTest = () => {
-  const [updateDate, setUpdateDate] = useState("chargin...");
+  const [updateDate, setUpdateDate] = useState("charging...");
 
   useEffect(() => {
     const owner = "drmorrison1832";
-    const repo = "to-do-list-exercice";
+    const repo = "to-do-list-exercice-front";
     const apiUrl = `https://api.github.com/repos/${owner}/${repo}/commits`;
     axios
       .get(apiUrl)

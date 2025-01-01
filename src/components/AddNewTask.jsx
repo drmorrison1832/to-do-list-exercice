@@ -1,9 +1,36 @@
-import { v4 as uuidv4 } from "uuid";
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 export default function AddNewTask(props) {
-  const { tasks, setTasks, newTaskLabel, setNewTaskLabel } = props;
-  const [updateDate, setUpdateDate] = useState("chargin...");
+  const { setMustRetrieve } = props;
+  const [newTaskLabel, setNewTaskLabel] = useState("");
+
+  useEffect(() => {}, []);
+
+  console.log("AddNewTask", new Date().getMilliseconds());
+
+  function handleClick(event) {
+    event.preventDefault();
+    if (newTaskLabel) {
+      axios
+        .post("http://localhost:3000/", {
+          label: newTaskLabel,
+        })
+        .then((response) => {
+          setNewTaskLabel("");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      console.log(
+        "AddNewTask: mustRetrieve set to true",
+        new Date().getMilliseconds()
+      );
+      setMustRetrieve(true);
+      setReload(true);
+    }
+  }
 
   return (
     <div className="new-task-form">
@@ -18,25 +45,19 @@ export default function AddNewTask(props) {
             setNewTaskLabel(event.target.value);
           }}
         />
-        <button
-          onClick={(event) => {
-            event.preventDefault();
-            const updateTasks = [
-              ...tasks,
-              {
-                label: newTaskLabel,
-                isDone: false,
-                isArchived: false,
-                id: uuidv4(),
-              },
-            ];
-            newTaskLabel && setTasks(updateTasks);
-            setNewTaskLabel("");
-          }}
-        >
+        <button onClick={handleClick}>
           <p>Add task</p>
         </button>
       </form>
     </div>
   );
 }
+/* axios
+                .get("http://localhost:3000/")
+                .then((response) => {
+                  setTasks(response.data);
+                  
+                })
+                .catch((error) => {
+                  console.error(error);
+                }); */

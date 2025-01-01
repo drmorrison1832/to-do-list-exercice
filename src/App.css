@@ -112,12 +112,15 @@ button:hover {
 
 .tasks-list,
 .archived-tasks {
-  min-height: 200px;
+  min-height: 250px;
+  max-height: 350px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* border: 1px solid; */
+  overflow: scroll;
+  scrollbar-width: none;
+  border: 0.5px solid;
 }
 
 .task {
@@ -138,4 +141,8 @@ label {
 
 .test-axios {
   font-size: 0.7rem;
+}
+
+.delete:hover {
+  cursor: default;
 }
