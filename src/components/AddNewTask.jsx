@@ -5,9 +5,7 @@ export default function AddNewTask(props) {
   const { setMustRetrieve } = props;
   const [newTaskLabel, setNewTaskLabel] = useState("");
 
-  useEffect(() => {}, []);
-
-  console.log("AddNewTask", new Date().getMilliseconds());
+  console.log(" AddNewTask", new Date().getMilliseconds());
 
   function handleClick(event) {
     event.preventDefault();
@@ -23,11 +21,12 @@ export default function AddNewTask(props) {
           console.error(error);
         });
 
+      setMustRetrieve(true);
+
       console.log(
         "AddNewTask: mustRetrieve set to true",
         new Date().getMilliseconds()
       );
-      setMustRetrieve(true);
     }
   }
 

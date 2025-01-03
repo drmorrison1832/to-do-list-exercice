@@ -5,8 +5,6 @@ import axios from "axios";
 // Components
 import TasksList from "./components/TasksList";
 import AddNewTask from "./components/AddNewTask";
-import ArchivedList from "./components/ArchivedList";
-import AxiosTest from "./components/AxiosTest";
 
 // Icons
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -14,13 +12,14 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faRotateLeft } from "@fortawesome/free-solid-svg-icons";
 library.add(faTrash, faRotateLeft);
 
-function App() {
-  console.log("App", new Date().getMilliseconds());
+const App = () => {
+  console.log("App started", new Date().getMilliseconds());
   const [tasks, setTasks] = useState([]);
   const [mustRetrieve, setMustRetrieve] = useState(false);
 
   console.log("App: mustRetrieve set to false", new Date().getMilliseconds());
 
+  // Retrieves data after first render or when mustRetrieve changes state.
   useEffect(() => {
     console.log("App: retriving...", new Date().getMilliseconds());
     axios
@@ -32,8 +31,6 @@ function App() {
           "Tasks retrieved from server",
           new Date().getMilliseconds()
         );
-        // setMustRetrieve(false);
-        // console.log("App: mustRetrieve set to false", new Date().getMilliseconds());
       })
       .catch((error) => {
         console.error(error);
@@ -44,28 +41,28 @@ function App() {
 
   return (
     <>
-      {/* <p>mustRetrieve is {mustRetrieve ? "true" : "false"}</p> */}
       <TasksList
         tasks={tasks}
         setTasks={setTasks}
         mustRetrieve={mustRetrieve}
         setMustRetrieve={setMustRetrieve}
+        isArchived={false}
       />
-      <div>
-        <AddNewTask
-          mustRetrieve={mustRetrieve}
-          setMustRetrieve={setMustRetrieve}
-        />
-        {/* <AxiosTest /> */}
-      </div>
-      <ArchivedList
+
+      <AddNewTask
+        mustRetrieve={mustRetrieve}
+        setMustRetrieve={setMustRetrieve}
+      />
+
+      <TasksList
         tasks={tasks}
         setTasks={setTasks}
         mustRetrieve={mustRetrieve}
         setMustRetrieve={setMustRetrieve}
+        isArchived={true}
       />
     </>
   );
-}
+};
 
 export default App;
